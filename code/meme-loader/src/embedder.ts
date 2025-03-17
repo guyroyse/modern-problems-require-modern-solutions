@@ -1,4 +1,4 @@
-import { pipeline, ImageInput } from '@huggingface/transformers'
+import { pipeline } from '@huggingface/transformers'
 
 /* Load the model for feature extraction */
 const extractor = await pipeline('image-feature-extraction', 'Xenova/clip-vit-base-patch32', { dtype: 'fp32' })
