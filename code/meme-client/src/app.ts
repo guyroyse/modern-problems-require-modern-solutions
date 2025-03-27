@@ -30,7 +30,6 @@ type Match = {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  hideAll()
   await initialize()
   showVideo()
 })
@@ -57,6 +56,14 @@ ipButton.addEventListener('click', useInnerProductMetric)
 l2Button.addEventListener('click', useEuclideanMetric)
 
 async function initialize() {
+  /* Request camera permissions first to get device labels */
+  try {
+    await navigator.mediaDevices.getUserMedia({ video: true })
+  } catch (error) {
+    window.alert('Failed to access camera')
+    return
+  }
+
   /* Get the available video devices */
   const devices = await navigator.mediaDevices.enumerateDevices()
   const videoDevices = devices.filter(device => device.kind === 'videoinput')
@@ -84,6 +91,7 @@ async function setCamera(deviceId: string): Promise<void> {
   const constraints = { video: { deviceId: { exact: deviceId }, width: 1280, height: 720 } }
   const mediaStream = await navigator.mediaDevices.getUserMedia(constraints)
   video.srcObject = mediaStream
+  await video.play()
 }
 
 function takePhoto(): void {
