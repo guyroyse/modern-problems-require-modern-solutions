@@ -21,8 +21,8 @@ await createIndex('COSINE')
 await createIndex('IP')
 await createIndex('L2')
 
-/* Set the default index in L2 */
-await redis.ft.aliasUpdate(aliasIndexName, indexName('L2'))
+/* Set the default index in Cosine */
+await redis.ft.aliasUpdate(aliasIndexName, indexName('COSINE'))
 
 /* Create a Meme Twin index for a given distance metric */
 async function createIndex(distanceMetric: DistanceMetric) {
