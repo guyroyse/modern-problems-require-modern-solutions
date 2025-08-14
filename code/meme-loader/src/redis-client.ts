@@ -33,7 +33,8 @@ async function createIndex(distanceMetric: DistanceMetric) {
   try {
     await redis.ft.dropIndex(thisIndexName)
   } catch (error) {
-    if (error instanceof ErrorReply && error.message !== 'Unknown Index name') throw error
+    // if (error instanceof ErrorReply && error.message !== 'Unknown Index name') throw error
+    // no-op
   }
 
   /* Create the index */
